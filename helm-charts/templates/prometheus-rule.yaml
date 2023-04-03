@@ -1,0 +1,38 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    role: test-alert-rules
+  name: test-rules
+spec:
+  groups:
+  - name: test
+    rules:
+    - alert: test-rule
+      expr: "up != 1"
+      labels:
+        team: abc
+        cluster: dev
+      annotations:
+        description: "up is not 1"
+        summary: "up is down"
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    role: test-alert-rules
+  name: another-test
+spec:
+  groups:
+  - name: another-test
+    rules:
+    - alert: another-rule
+      expr: "down == 1"
+      labels:
+        team: abc
+        cluster: prod
+      annotations:
+        description: "down is 1"
+        summary: "down is up"
+---
