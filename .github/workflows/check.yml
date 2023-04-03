@@ -39,6 +39,16 @@ jobs:
           ls ./rules
           cat ./rules/rule_*.yml
 
+
+      - name: Check Prometheus alert rules
+        uses: peimanja/promtool-github-actions@master
+        with:
+          promtool_actions_subcommand: 'rules'
+          promtool_actions_files: './rules/rule_*.yml'
+          promtool_actions_version: '2.14.0'
+          promtool_actions_comment: true
+
+
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
