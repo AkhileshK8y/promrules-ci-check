@@ -33,10 +33,10 @@ jobs:
       - name: Generate Helm Renders
         run: |
           helm template dummy ./helm-charts --output-dir ./render
-          yq eval '.spec' ./render/helm-charts/templates/prometheus-rule.yaml > ./promrule_groups.yaml
-          yq -s '"rule_" + $index' ./promrule_groups.yaml
-          ls .
-          cat *.yml
+          yq eval '.spec' ./render/helm-charts/templates/prometheus-rule.yaml > ./rules/promrule_groups.yaml
+          yq -s '"rule_" + $index' ./rules/promrule_groups.yaml
+          ls ./rules
+          cat ./rules/*.yml
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
