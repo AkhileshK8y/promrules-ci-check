@@ -33,6 +33,7 @@ jobs:
       - name: Generate Helm Renders
         run: |
           helm template dummy ./helm-charts --output-dir ./render
+          mkdir rules
           yq eval '.spec' ./render/helm-charts/templates/prometheus-rule.yaml > ./rules/promrule_groups.yaml
           yq -s '"rule_" + $index' ./rules/promrule_groups.yaml
           ls ./rules
